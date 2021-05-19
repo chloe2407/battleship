@@ -164,7 +164,15 @@ body {
   
   .grid-display {
     display: flex;
+    width: 20vw; 
+    flex-wrap: wrap;
   }
+  .info-startgame {
+    display: flex; 
+    flex-direction: row; 
+    visibility: hidden;
+  }
+  
   
   .ship > div {
     width: 4.6vmin;
@@ -178,6 +186,9 @@ body {
     width: calc(4.6vmin * var(--width, 1));
     height: calc(4.6vmin * var(--height, 1));
     border-radius: 2.3vmin;
+  }
+  .grid-ship {
+    margin: 5 auto;
   }
   
   .battleship-grid div {

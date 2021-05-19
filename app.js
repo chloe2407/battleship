@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const width = 10
     let allShipsPlaced = false
     let shotFired = -1
+    document.getElementById('info-startgame').style.visibility = "hidden"
 
     //Computer Ships declaration
     const shipArray = [
@@ -87,9 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // listen to see when the user clicks the start button, making sure that all ships are places
     startButton.addEventListener('click', () => {
     if (allShipsPlaced) {
+        document.getElementById('setup-title').style.display = 'none'
         setupButtons.style.display = 'none'
         playGame()
-    } else infoDisplay.innerHTML = "Please place all ships"
+    } else infoDisplay.innerHTML = "Please place all ships"   
     })
     
   
@@ -224,6 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Game Logic
     function playGame() {
       if (isGameOver) return
+      document.getElementById('info-startgame').style.visibility = "visible"
       if (currentPlayer === 'user') {
         turnDisplay.innerHTML = 'Your Go'
         computerSquares.forEach(square => square.addEventListener('click', function(e) {
@@ -247,11 +250,26 @@ document.addEventListener('DOMContentLoaded', () => {
       const enemySquare = computerGrid.querySelector(`div[data-id='${shotFired}']`)
       const obj = Object.values(classList)
       if (!enemySquare.classList.contains('boom') && currentPlayer === 'user' && !isGameOver) {
-        if (obj.includes('destroyer')) destroyerCount++
-        if (obj.includes('submarine')) submarineCount++
-        if (obj.includes('cruiser')) cruiserCount++
-        if (obj.includes('battleship')) battleshipCount++
-        if (obj.includes('carrier')) carrierCount++
+        if (obj.includes('destroyer')) {
+            destroyerCount++
+            document.getElementById(`edestroyer-${destroyerCount - 1}`).classList.add('boom')
+        }
+        if (obj.includes('submarine')) {
+            submarineCount++
+            document.getElementById(`esubmarine-${submarineCount - 1}`).classList.add('boom')
+        }
+        if (obj.includes('cruiser')) {
+            cruiserCount++
+            document.getElementById(`ecruiser-${cruiserCount - 1}`).classList.add('boom')
+        }
+        if (obj.includes('battleship')) {
+            battleshipCount++
+            document.getElementById(`ebattleship-${battleshipCount - 1}`).classList.add('boom')
+        }
+        if (obj.includes('carrier')) {
+            carrierCount++
+            document.getElementById(`ecarrier-${carrierCount - 1}`).classList.add('boom')
+        }
       }
       if (obj.includes('taken')) {
         enemySquare.classList.add('boom')

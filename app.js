@@ -1,18 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     // declaring all variables (info from index.html)
 
-    // the battleship boards
+    // the shipD boards
     const userGrid = document.querySelector('.grid-user')
     const computerGrid = document.querySelector('.grid-computer')
     const displayGrid = document.querySelector('.grid-display')
 
     //collect all the battleships and assign names
     const ships = document.querySelectorAll('.ship')
-    const destroyer = document.querySelector('.destroyer-container')
-    const submarine = document.querySelector('.submarine-container')
-    const cruiser = document.querySelector('.cruiser-container')
-    const battleship = document.querySelector('.battleship-container')
-    const carrier = document.querySelector('.carrier-container')
+    const shipA = document.querySelector('.shipA-container')
+    const shipB = document.querySelector('.shipB-container')
+    const shipC = document.querySelector('.shipC-container')
+    const shipD = document.querySelector('.battleship-container')
+    const shipE = document.querySelector('.shipE-container')
 
     // other information that is useful to the player to play the game
     const startButton = document.querySelector('#start')
@@ -37,35 +37,35 @@ document.addEventListener('DOMContentLoaded', () => {
     //Computer Ships declaration
     const shipArray = [
       {
-        name: 'destroyer',
+        name: 'shipA',
         directions: [
           [0, 1],
           [0, width]
         ]
       },
       {
-        name: 'submarine',
+        name: 'shipB',
         directions: [
           [0, 1, 2],
           [0, width, width*2]
         ]
       },
       {
-        name: 'cruiser',
+        name: 'shipC',
         directions: [
           [0, 1, 2],
           [0, width, width*2]
         ]
       },
       {
-        name: 'battleship',
+        name: 'shipD',
         directions: [
           [0, 1, 2, 3],
           [0, width, width*2, width*3]
         ]
       },
       {
-        name: 'carrier',
+        name: 'shipE',
         directions: [
           [0, 1, 2, 3, 4],
           [0, width, width*2, width*3, width*4]
@@ -125,20 +125,20 @@ document.addEventListener('DOMContentLoaded', () => {
     //Rotate the ships
     function rotate() {
       if (isHorizontal) {
-        destroyer.classList.toggle('destroyer-container-vertical')
-        submarine.classList.toggle('submarine-container-vertical')
-        cruiser.classList.toggle('cruiser-container-vertical')
-        battleship.classList.toggle('battleship-container-vertical')
-        carrier.classList.toggle('carrier-container-vertical')
+        shipA.classList.toggle('shipA-container-vertical')
+        shipB.classList.toggle('shipB-container-vertical')
+        shipC.classList.toggle('shipCcontainer-vertical')
+        shipD.classList.toggle('shipD-container-vertical')
+        shipE.classList.toggle('shipE-container-vertical')
         isHorizontal = false
         return
       }
       if (!isHorizontal) {
-        destroyer.classList.toggle('destroyer-container-vertical')
-        submarine.classList.toggle('submarine-container-vertical')
-        cruiser.classList.toggle('cruiser-container-vertical')
-        battleship.classList.toggle('battleship-container-vertical')
-        carrier.classList.toggle('carrier-container-vertical')
+        shipA.classList.toggle('shipA-container-vertical')
+        shipB.classList.toggle('shipB-container-vertical')
+        shipC.classList.toggle('shipCcontainer-vertical')
+        shipD.classList.toggle('shipD-container-vertical')
+        shipE.classList.toggle('shipE-container-vertical')
         isHorizontal = true
         return
       }
@@ -162,6 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
       selectedShipNameWithIndex = e.target.id
     }))
   
+    //drag functions
     function dragStart() {
       draggedShip = this
       draggedShipLength = this.childNodes.length
@@ -183,10 +184,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function dragDrop() {
       let shipNameWithLastId = draggedShip.lastChild.id
       let shipClass = shipNameWithLastId.slice(0, -2)
-      // console.log(shipClass)
       let lastShipIndex = parseInt(shipNameWithLastId.substr(-1))
       let shipLastId = lastShipIndex + parseInt(this.dataset.id)
-      // console.log(shipLastId)
+
+      // squares the last ship index is not allowed in
       const notAllowedHorizontal = [0,10,20,30,40,50,60,70,80,90,1,11,21,31,41,51,61,71,81,91,2,22,32,42,52,62,72,82,92,3,13,23,33,43,53,63,73,83,93]
       const notAllowedVertical = [99,98,97,96,95,94,93,92,91,90,89,88,87,86,85,84,83,82,81,80,79,78,77,76,75,74,73,72,71,70,69,68,67,66,65,64,63,62,61,60]
       
@@ -195,9 +196,8 @@ document.addEventListener('DOMContentLoaded', () => {
   
       selectedShipIndex = parseInt(selectedShipNameWithIndex.substr(-1))
   
-      shipLastId = shipLastId - selectedShipIndex
-      // console.log(shipLastId)
-  
+      shipLastId = shipLastId - selectedShipIndex 
+      
       if (isHorizontal && !newNotAllowedHorizontal.includes(shipLastId)) {
         for (let i=0; i < draggedShipLength; i++) {
           let directionClass
@@ -213,13 +213,23 @@ document.addEventListener('DOMContentLoaded', () => {
           userSquares[parseInt(this.dataset.id) - selectedShipIndex + width*i].classList.add('taken', 'vertical', directionClass, shipClass)
         }
       } else return
-  
+      console.log(userSquares)
+      console.log(userSquares[1].includes('taken'))
+      console.log(getAllIndexes(userSquares, 'taken'))
       displayGrid.removeChild(draggedShip)
       if(!displayGrid.querySelector('.ship')) allShipsPlaced = true
     }
+
+    function getAllIndexes(arr, val) {
+        var indexes = [], i;
+        for(i = 0; i < arr.length; i++)
+            if (arr[i].includes(val))
+                indexes.push(i);
+        return indexes;
+    }
   
     function dragEnd() {
-      // console.log('dragend')
+    //   console.log('dragend')
     }
   
   
@@ -240,35 +250,35 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   
-    let destroyerCount = 0
-    let submarineCount = 0
-    let cruiserCount = 0
-    let battleshipCount = 0
-    let carrierCount = 0
+    let shipACount = 0
+    let shipBCount = 0
+    let shipCCount = 0
+    let shipDCount = 0
+    let shipECount = 0
   
     function revealSquare(classList) {
       const enemySquare = computerGrid.querySelector(`div[data-id='${shotFired}']`)
       const obj = Object.values(classList)
       if (!enemySquare.classList.contains('boom') && currentPlayer === 'user' && !isGameOver) {
-        if (obj.includes('destroyer')) {
-            destroyerCount++
-            document.getElementById(`edestroyer-${destroyerCount - 1}`).classList.add('boom')
+        if (obj.includes('shipA')) {
+            shipACount++
+            document.getElementById(`eshipA-${shipACount - 1}`).classList.add('boom')
         }
-        if (obj.includes('submarine')) {
-            submarineCount++
-            document.getElementById(`esubmarine-${submarineCount - 1}`).classList.add('boom')
+        if (obj.includes('shipB')) {
+            shipBCount++
+            document.getElementById(`eshipB-${shipBCount - 1}`).classList.add('boom')
         }
-        if (obj.includes('cruiser')) {
-            cruiserCount++
-            document.getElementById(`ecruiser-${cruiserCount - 1}`).classList.add('boom')
+        if (obj.includes('shipC')) {
+            shipCCount++
+            document.getElementById(`eshipC-${shipCCount} - 1}`).classList.add('boom')
         }
-        if (obj.includes('battleship')) {
-            battleshipCount++
-            document.getElementById(`ebattleship-${battleshipCount - 1}`).classList.add('boom')
+        if (obj.includes('shipD')) {
+            shipDCount++
+            document.getElementById(`eshipD-${shipDCount - 1}`).classList.add('boom')
         }
-        if (obj.includes('carrier')) {
-            carrierCount++
-            document.getElementById(`ecarrier-${carrierCount - 1}`).classList.add('boom')
+        if (obj.includes('shipE')) {
+            shipECount++
+            document.getElementById(`eshipE-${shipECount - 1}`).classList.add('boom')
         }
       }
       if (obj.includes('taken')) {
@@ -281,11 +291,11 @@ document.addEventListener('DOMContentLoaded', () => {
       playGame()
     }
   
-    let cpuDestroyerCount = 0
-    let cpuSubmarineCount = 0
-    let cpuCruiserCount = 0
-    let cpuBattleshipCount = 0
-    let cpuCarrierCount = 0
+    let cpushipACount = 0
+    let cpushipBCount = 0
+    let cpushipCCount = 0
+    let cpushipDCount = 0
+    let cpushipECount = 0
   
   
     function enemyGo(square) {
@@ -293,11 +303,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!userSquares[square].classList.contains('boom')) {
         const hit = userSquares[square].classList.contains('taken')
         userSquares[square].classList.add(hit ? 'boom' : 'miss')
-        if (userSquares[square].classList.contains('destroyer')) cpuDestroyerCount++
-        if (userSquares[square].classList.contains('submarine')) cpuSubmarineCount++
-        if (userSquares[square].classList.contains('cruiser')) cpuCruiserCount++
-        if (userSquares[square].classList.contains('battleship')) cpuBattleshipCount++
-        if (userSquares[square].classList.contains('carrier')) cpuCarrierCount++
+        if (userSquares[square].classList.contains('shipA')) cpushipACount++
+        if (userSquares[square].classList.contains('shipB')) cpushipBCount++
+        if (userSquares[square].classList.contains('shipC')) cpushipCCount++
+        if (userSquares[square].classList.contains('shipD')) cpushipDCount++
+        if (userSquares[square].classList.contains('shipE')) cpushipECount++
         checkForWins()
       } else enemyGo()
       currentPlayer = 'user'
@@ -306,52 +316,52 @@ document.addEventListener('DOMContentLoaded', () => {
   
     function checkForWins() {
       let enemy = 'computer'
-      if (destroyerCount === 2) {
-        infoDisplay.innerHTML = `You sunk the ${enemy}'s destroyer`
-        destroyerCount = 10
+      if (shipACount === 2) {
+        infoDisplay.innerHTML = `You sunk the ${enemy}'s shipA`
+        shipACount = 10
       }
-      if (submarineCount === 3) {
-        infoDisplay.innerHTML = `You sunk the ${enemy}'s submarine`
-        submarineCount = 10
+      if (shipBCount === 3) {
+        infoDisplay.innerHTML = `You sunk the ${enemy}'s shipB`
+        shipBCount = 10
       }
-      if (cruiserCount === 3) {
-        infoDisplay.innerHTML = `You sunk the ${enemy}'s cruiser`
-        cruiserCount = 10
+    if (shipCCount === 3) {
+        infoDisplay.innerHTML = `You sunk the ${enemy}'s shipC`
+        shipCCount = 10
       }
-      if (battleshipCount === 4) {
-        infoDisplay.innerHTML = `You sunk the ${enemy}'s battleship`
-        battleshipCount = 10
+      if (shipDCount === 4) {
+        infoDisplay.innerHTML = `You sunk the ${enemy}'s shipD`
+        shipDCount = 10
       }
-      if (carrierCount === 5) {
-        infoDisplay.innerHTML = `You sunk the ${enemy}'s carrier`
-        carrierCount = 10
+      if (shipECount === 5) {
+        infoDisplay.innerHTML = `You sunk the ${enemy}'s shipE`
+        shipECount = 10
       }
-      if (cpuDestroyerCount === 2) {
-        infoDisplay.innerHTML = `${enemy} sunk your destroyer`
-        cpuDestroyerCount = 10
+      if (cpushipACount === 2) {
+        infoDisplay.innerHTML = `${enemy} sunk your shipA`
+        cpushipACount = 10
       }
-      if (cpuSubmarineCount === 3) {
-        infoDisplay.innerHTML = `${enemy} sunk your submarine`
-        cpuSubmarineCount = 10
+      if (cpushipBCount === 3) {
+        infoDisplay.innerHTML = `${enemy} sunk your shipB`
+        cpushipBCount = 10
       }
-      if (cpuCruiserCount === 3) {
-        infoDisplay.innerHTML = `${enemy} sunk your cruiser`
-        cpuCruiserCount = 10
+      if(cpushipCCount === 3) {
+        infoDisplay.innerHTML = `${enemy} sunk your shipC`
+        cpushipCCount = 10
       }
-      if (cpuBattleshipCount === 4) {
-        infoDisplay.innerHTML = `${enemy} sunk your battleship`
-        cpuBattleshipCount = 10
+      if (cpushipDCount === 4) {
+        infoDisplay.innerHTML = `${enemy} sunk your shipD`
+        cpushipDCount = 10
       }
-      if (cpuCarrierCount === 5) {
-        infoDisplay.innerHTML = `${enemy} sunk your carrier`
-        cpuCarrierCount = 10
+      if (cpushipECount === 5) {
+        infoDisplay.innerHTML = `${enemy} sunk your shipE`
+        cpushipECount = 10
       }
   
-      if ((destroyerCount + submarineCount + cruiserCount + battleshipCount + carrierCount) === 50) {
+      if ((shipACount + shipBCount + shipCCount + shipDCount + shipECount) === 50) {
         infoDisplay.innerHTML = "YOU WIN"
         gameOver()
       }
-      if ((cpuDestroyerCount + cpuSubmarineCount + cpuCruiserCount + cpuBattleshipCount + cpuCarrierCount) === 50) {
+      if ((cpushipACount + cpushipBCount + cpushipCCount + cpushipDCount + cpushipECount) === 50) {
         infoDisplay.innerHTML = `${enemy.toUpperCase()} WINS`
         gameOver()
       }

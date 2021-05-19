@@ -2,12 +2,9 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Battle Ships</title>
+    <title>BattleShip</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat&display=swap" rel="stylesheet">
-    <script>
-      let gameMode = 'singlePlayer'
-    </script>
     <script src="app.js" charset="utf-8"></script>
   </head>
   <body>
@@ -15,11 +12,11 @@
       <div class="flex-column">
         <h1 id="setup-title">Your Ships</h1>
         <div class="grid-display">
-          <div class="ship grid-ship destroyer-container"  draggable="true"><div id="destroyer-0"></div><div id="destroyer-1"></div></div>
-          <div class="ship grid-ship submarine-container"  draggable="true"><div id="submarine-0"></div><div id="submarine-1"></div><div id="submarine-2"></div></div>
-          <div class="ship grid-ship cruiser-container" draggable="true"><div id="cruiser-0"></div><div id="cruiser-1"></div><div id="cruiser-2"></div></div>
-          <div class="ship grid-ship battleship-container" draggable="true"><div id="battleship-0"></div><div id="battleship-1"></div><div id="battleship-2"></div><div id="battleship-3"></div></div>
-          <div class="ship grid-ship carrier-container" draggable="true"><div id="carrier-0"></div><div id="carrier-1"></div><div id="carrier-2"></div><div id="carrier-3"></div><div id="carrier-4"></div></div>
+          <div class="ship grid-ship shipA-container"  draggable="true"><div id="shipA-0"></div><div id="shipA-1"></div></div>
+          <div class="ship grid-ship shipB-container"  draggable="true"><div id="shipB-0"></div><div id="shipB-1"></div><div id="shipB-2"></div></div>
+          <div class="ship grid-ship shipC-container" draggable="true"><div id="shipC-0"></div><div id="shipC-1"></div><div id="shipC-2"></div></div>
+          <div class="ship grid-ship shipD-container" draggable="true"><div id="shipD-0"></div><div id="shipD-1"></div><div id="shipD-2"></div><div id="shipD-3"></div></div>
+          <div class="ship grid-ship shipE-container" draggable="true"><div id="shipE-0"></div><div id="shipE-1"></div><div id="shipE-2"></div><div id="shipE-3"></div><div id="shipE-4"></div></div>
         </div>
         <div class="setup-buttons" id="setup-buttons">
           <button id="start" class="inactive btn">Start Game</button>
@@ -28,11 +25,11 @@
         <div id="info-startgame">
           <h1>Enemy's Ship's Status</h1>
         <div class="grid-display">
-          <div class="ship destroyer-container"  draggable="false" id="e-destroyer"><div id="edestroyer-0"></div><div id="edestroyer-1"></div></div>
-          <div class="ship submarine-container"  draggable="false" id="e-submarine"><div id="esubmarine-0"></div><div id="esubmarine-1"></div><div id="esubmarine-2"></div></div>
-          <div class="ship cruiser-container" draggable="false" id="e-cruiser"><div id="ecruiser-0"></div><div id="ecruiser-1"></div><div id="ecruiser-2"></div></div>
-          <div class="ship battleship-container" draggable="false" id="e-battleship"><div id="ebattleship-0"></div><div id="ebattleship-1"></div><div id="ebattleship-2"></div><div id="ebattleship-3"></div></div>
-          <div class="ship carrier-container" draggable="false" id="e-carrier"><div id="ecarrier-0"></div><div id="ecarrier-1"></div><div id="ecarrier-2"></div><div id="ecarrier-3"></div><div id="ecarrier-4"></div></div>
+          <div class="ship shipA-container"  draggable="false" id="e-shipA"><div id="eshipA-0"></div><div id="eshipA-1"></div></div>
+          <div class="ship shipB-container"  draggable="false" id="e-shipB"><div id="eshipB-0"></div><div id="eshipB-1"></div><div id="eshipB-2"></div></div>
+          <div class="ship shipC-container" draggable="false" id="e-shipC"><div id="eshipC-0"></div><div id="eshipC-1"></div><div id="eshipC-2"></div></div>
+          <div class="ship shipD-container" draggable="false" id="e-shipD"><div id="eshipD-0"></div><div id="eshipD-1"></div><div id="eshipD-2"></div><div id="eshipD-3"></div></div>
+          <div class="ship shipE-container" draggable="false" id="e-shipE"><div id="eshipE-0"></div><div id="eshipE-1"></div><div id="eshipE-2"></div><div id="eshipE-3"></div><div id="eshipE-4"></div></div>
         </div>
           <h3 id="whose-go" class="info-text">Your Go</h3>
           <a href="index.html" ><img class="btn-img" src="img/restart.png"></a>

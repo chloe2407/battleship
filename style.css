@@ -195,49 +195,44 @@ body {
     border: 1px solid hsla(0, 0%, 100%, .2);
   }
   
-  .destroyer-container {
+  .shipA-container {
     --width: 2;
   }
   
-  .destroyer-container-vertical {
+  .shipA-container-vertical {
     --height: 2;
     --width: 1;
   }
   
-  .submarine-container,
-  .cruiser-container {
+  .shipB-container,
+  .shipC-container {
     --width: 3;
   }
   
-  .submarine-container-vertical,
-  .cruiser-container-vertical {
+  .shipB-container-vertical,
+  .shipC-container-vertical {
     --height: 3;
     --width: 1;
   }
   
-  .battleship-container {
+  .shipD-container {
     --width: 4;
   }
   
-  .battleship-container-vertical {
+  .shipD-container-vertical {
     --height: 4;
     --width: 1;
   }
   
-  .carrier-container {
+  .shipE-container {
     --width: 5;
   }
   
-  .carrier-container-vertical {
+  .shipE-container-vertical {
     --height: 5;
     --width: 1;
   }
   
-  .hidden-info {
-    font-size: 1.5rem;
-    align-items: center;
-    flex-direction: column;
-  }
   
   .info-text {
     margin: 1rem;
@@ -301,20 +296,4 @@ body {
     100% {
       background-color: hsl(0, 0%, 80%);
     }
-  }
-  
-  .player {
-    margin: 2vmin;
-  }
-  
-  .connected, .ready {
-    font-weight: normal;
-    opacity: .25;
-    text-decoration: line-through;
-  }
-  
-  .connected.active,
-  .ready.active {
-    opacity: 1;
-    text-decoration: none;
   }

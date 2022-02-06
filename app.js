@@ -213,9 +213,9 @@ document.addEventListener('DOMContentLoaded', () => {
           userSquares[parseInt(this.dataset.id) - selectedShipIndex + width*i].classList.add('taken', 'vertical', directionClass, shipClass)
         }
       } else return
-      console.log(userSquares)
-      console.log(userSquares[1].includes('taken'))
-      console.log(getAllIndexes(userSquares, 'taken'))
+      // console.log(userSquares)
+      // console.log(userSquares[1].includes('taken'))
+      // console.log(getAllIndexes(userSquares, 'taken'))
       displayGrid.removeChild(draggedShip)
       if(!displayGrid.querySelector('.ship')) allShipsPlaced = true
     }
